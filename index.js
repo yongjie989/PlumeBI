@@ -32,9 +32,13 @@ function executesql(sql, callback){
         //console.log(fields);
         if(fields){
             obj.column = [];
+            obj.types = [];
+            obj.length = [];
             for(var x in fields){
-                //name, length, 
+                //name, length, type
                 obj.column.push(fields[x].name);
+                obj.types.push(fields[x].type);
+                obj.length.push(fields[x].length);
                 //console.log(fields[x].name);
             };
         };
