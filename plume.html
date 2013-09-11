@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>PlumeBI - Business Intelligence Data Analytics</title>
+	<!--	
+	<link href='http://fonts.googleapis.com/css?family=Buenard' rel='stylesheet' type='text/css'>
+	-->
+	<link type="text/css" rel="stylesheet" href="css/plume_1.0.css" />
+    <link type="text/css" href="css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="grid/pqgrid.min.css" />    
+    <link rel="stylesheet" href="grid/themes/office/pqgrid.css" />
+	<!--
+	<link type="text/css" href="/css/jquery-ui.css" rel="stylesheet" />
+    <script src="/js/jquery-1.6.2.min.js" type="text/javascript"></script>	
+    <script src="/js/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/themes/base/jquery-ui.css" />
+	-->
+    <script src="js/jquery-1.9.1.js"></script>    
+    <script src="js/jquery-ui-1.8.20.min.js"></script>
+    <script src="grid/pqgrid.min.js"></script>
+	<script type="text/javascript" src="edit_area/edit_area_full.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#recipe_list_tabs').tabs();
+	});
+	</script>	
+</head>
+<body>
+<div id="whole_content">
+	<div id="toolbar">
+		
+		<div>
+			<label><img src="images/plume.png" height="15" alt="" /> v1.0</label>
+			<span id="Open">
+				<img src="images/icons/actions/document-open.png" alt="Open Recipe" > 
+				Open
+			</span>
+			<span id="Save">
+				<img src="images/icons/actions/document-save.png" alt="Save Recipe" > 
+				Save
+			</span>
+			<span id="NewSQL">
+				<img src="images/icons/stock/data/stock_data-edit-sql-query.png" alt="Create New SQL" > 
+				SQL
+			</span>
+			<span id="ImportExcel">
+				<img src="images/icons/mimetypes/gnome-mime-application-vnd.ms-excel.png" alt="Import Excel sheet" > 
+				Import Excel
+			</span>
+			<span id="DataProcess">
+				<img src="images/icons/stock/data/stock_advanced-filter.png" alt="Join/Union/filter data" > 
+				Data Process
+			</span>
+			<span id="DataSummary">
+				<img src="images/icons/stock/data/stock_data-table.png" alt="Summary data" > 
+				Data Summary
+			</span>
+			<span id="DataRotation">
+				<img src="images/icons/stock/data/stock_update-data.png" alt="Rotation data" > 
+				Data Rotation
+			</span>
+			<span id="Charts">
+				<img src="images/icons/stock/chart/stock_chart-edit-type.png" alt="Create Chart" > 
+				Charts
+			</span>
+		</div>
+	</div>
+	<div id="toolbar_setup_panel" style="display:none;">
+		<div>
+			<span id="NewPage_Detail" style="display:none;">
+				<img src="images/layout_1.png" id="layout_1"> 
+				<img src="images/layout_2.png" id="layout_2">
+			</span>
+		</div>
+		<div id="close_toolbar_setup_panel">
+			<img id="close_toolbar_setup_panel_btn" src="images/icons/actions/go-top.png" alt="Close the panel" style="cursor:pointer;">
+		</div>
+	</div>
+	
+	<div id="recipe_list_tabs">
+			<ul>
+				<li><a href="#recipe_list_tabs-1">Public</a></li>
+				<li><a href="#recipe_list_tabs-2">My Recipe</a></li>
+				<li><a href="#recipe_list_tabs-3">Schedule</a></li>
+			</ul>
+			<div id="recipe_list_tabs-1">
+                <div id="recipe_header">
+                    Recipe name: {{ recipes.recipe_name }}
+                </div>
+				<div>
+                    {% for r in recipes.process_list %}
+                    <div class="item_in_recipe_list"><a href='javascript:open_process("{{ r.process_id }}","{{ r.table_name }}")'>{{ r.type }} - {{ r.table_name }}</a></div>
+                    {% endfor %}
+				</div>
+			</div>
+			<div id="recipe_list_tabs-2">
+			my recipe			
+			</div>
+			<div id="recipe_list_tabs-3">
+			setup auto run report.			
+			</div>
+	</div>
+		
+	
+	<div id="SQLProcess_Block" style="display:none;">
+        <div id="SQLProcess_toolbar">
+            <button id="SQLEditorButton"></button>
+            <button id="SQLTableButton"></button>
+        </div>
+        <div id="Recipe_name"></div>
+        <div id="SQLEditor" style="display:none">
+            <div>
+                <div>
+                    Connection:
+                    <select id="connection_name" name="connection_name" size="0">
+                        <option value="localhost_mysql" selected="selected">localhost_mysql</option>                    
+                    </select>
+                </div>
+                <div>
+                    Statement:
+                    <textarea name="SQLEditorContent" id="SQLEditorContent" style="width:95%;">
+SELECT * FROM TAB
+WHERE name = 'Ethan';
+                    </textarea>
+                </div>
+                <div>
+                    Variables:
+                    <div id="SQLVariable"></div>
+                </div>
+                <div>
+                    <button id="SQLProcess_execute_button" type="button" onclick="SQLProcess_execute(editAreaLoader.getValue('SQLEditorContent'))">Execute</button>
+                </div>
+            </div>
+        </div>
+        <div id="SQLTableBlock">
+			<div id="SQLTable"></div>        
+        </div>
+	</div>
+	
+    <script src="js/plume.js"></script>
+
+        
+</div>
+<script type="text/javascript" >
+	editAreaLoader.init({
+    	id: "SQLEditorContent",		
+    	start_highlight: true,
+    	allow_resize: "both",
+    	allow_toggle: true,
+    	word_wrap: true,
+    	allow_toggle: false,
+    	language: "en",
+    	syntax: "sql",
+        min_height: 300
+    });
+</script>
+</body>
+</html>

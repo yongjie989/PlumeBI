@@ -1,0 +1,34 @@
+jMetro
+http://jquit.com/builder/#gcc=ffffff&gcb=d4d4d4&gct=525252&gci=525252&pcc=d4d4d4&acb=525252&o=ffffff&ghc=3399ff&ght=ffffff&ghi=ffffff&gdc=d4d4d4&gdb=d4d4d4&gdt=525252&tdc=3399ff&tdb=3399ff&tdt=ffffff&tdi=ffffff&ddc=d4d4d4&ddb=d4d4d4&ddt=525252&pxd=000000&asc=3399ff&ast=ffffff&goc=66B3FF&gob=66B3FF&got=ffffff&toc=66B3FF&tob=66B3FF&tot=ffffff&toi=ffffff&doc=66B3FF&dob=66B3FF&dot=ffffff&pxa=525252&gac=3399ff&gab=3399ff&gat=ffffff&tac=ffffff&tab=d4d4d4&tat=525252&tai=d4d4d4&dac=3399ff&dab=3399ff&dat=ffffff&dic=d4d4d4&dib=3399ff&dit=ffffff&gic=efdca9&gib=efdca9&git=525252&gii=525252&ec=c31d1d&eb=c31d1d&et=ffffff&ei=ffffff
+
+jQuery Grid Plugin
+http://paramquery.com/tutorial
+
+
+http://www.cdolivet.com/editarea/editarea/exemples/exemple_full.html
+
+
+
+type	MySQLdb (localhost)	rdbms (Google App Engine)
+varchar	253	12
+char	254	1
+datetime	12	93
+date	10	91
+time	11	92
+timestamp	7	93
+year	13	91
+bigint	8	-5
+double	5	8
+decimal	246	3
+float	4	6
+mediumint	9	4
+int	3	4
+smallint	2	5
+tinyint	1	-6
+longtext	252	2005
+mediumtext	252	2005
+tinytext	252	12
+text	252	12
+bit	16	-7
+
+
